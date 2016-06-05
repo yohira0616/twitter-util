@@ -23,6 +23,9 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.13'
 	// http://mvnrepository.com/artifact/org.springframework.social/spring-social-twitter
 	compile group: 'org.springframework.social', name: 'spring-social-twitter', version: '1.1.2.RELEASE'
+	// http://mvnrepository.com/artifact/org.projectlombok/lombok
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+	
 	
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
