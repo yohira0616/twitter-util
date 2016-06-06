@@ -1,5 +1,6 @@
 package org.bigfield.twitter.operation.util;
 
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
 
 /**
@@ -11,8 +12,10 @@ import org.springframework.social.twitter.api.Twitter;
 public class RemoveExceptMurualFollower {
 
 	public void execute(Twitter twitter) {
-		twitter.friendOperations().getFollowerIds().forEach((friendId) -> {
-			if (!twitter.friendOperations().getFollowerIds().contains(friendId)) {
+		CursoredList<Long> followers = twitter.friendOperations().getFollowerIds();
+
+		twitter.friendOperations().getFriendIds().forEach((friendId) -> {
+			if (!followers.contains(friendId)) {
 				twitter.friendOperations().unfollow(friendId);
 			}
 		});

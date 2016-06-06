@@ -8,13 +8,13 @@ import org.springframework.social.twitter.api.impl.TwitterTemplate;
 public class Main {
 
 	public static void main(String[] args) {
-		AccessToken token = new AccessToken();
+		PropertyLoader loader = new PropertyLoader();
+
+		AccessToken token = loader.loadAccessToken();
 		Twitter twitter = new TwitterTemplate(token.getConsumerKey(), token.getConsumerSecret(), token.getAccessToken(),
 				token.getAccessTokenSecret());
 		TwitterUtil operation = new TwitterUtil(twitter);
-		operation.followReturn();
+		operation.noop();
 		System.out.println("done");
-
 	}
-
 }

@@ -29,4 +29,8 @@ public class TwitterUtil {
 		removeExceptMurualFollower.execute(twitter);
 	}
 
+	public void noop() {
+		// noop
+	}
+
 }

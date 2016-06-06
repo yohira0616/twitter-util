@@ -13,25 +13,23 @@ import org.springframework.social.twitter.api.Twitter;
 public class FollowReturn {
 
 	public void execute(Twitter twitter) {
+
 		CursoredList<Long> followerList = twitter.friendOperations().getFollowerIds();
 		CursoredList<Long> friendList = twitter.friendOperations().getFriendIds();
-
 		int count = 0;
 		for (Long id : followerList) {
+			if (count > 99) {
+				break;
+			}
 			if (!friendList.contains(id)) {
 				try {
 					twitter.friendOperations().follow(id);
+					count++;
 				} catch (OperationNotPermittedException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		/*
-		 * int count=0;
-		 * twitter.friendOperations().getFollowerIds().forEach((followerId) -> {
-		 * if (!twitter.friendOperations().getFriendIds().contains(followerId))
-		 * { twitter.friendOperations().follow(followerId); count++; } });
-		 */
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.bigfield.twitter.operation.util;
 
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
 
 /**
@@ -11,8 +12,12 @@ import org.springframework.social.twitter.api.Twitter;
 public class HashtagFollow {
 
 	public void execute(Twitter twitter, String word) {
+
+		CursoredList<Long> friends = twitter.friendOperations().getFriendIds();
 		twitter.searchOperations().search("#" + word, 100).getTweets().stream().forEach((tweet) -> {
-			twitter.friendOperations().follow(tweet.getFromUser());
+			if (!friends.contains(tweet.getFromUserId())) {
+				twitter.friendOperations().follow(tweet.getFromUser());
+			}
 		});
 	}
 
